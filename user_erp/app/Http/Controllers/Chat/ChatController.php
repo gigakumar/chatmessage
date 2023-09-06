@@ -190,7 +190,7 @@ class ChatController extends Controller
 
                $foo =$msgmodal->select('msg')->where('con_id',$req->chat_id)->get();
                   
-                return collect($foo)->sortBy('msg');
+                return collect($foo)->toArray();
           }
 
 
