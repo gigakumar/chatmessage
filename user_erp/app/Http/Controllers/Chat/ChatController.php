@@ -68,10 +68,10 @@ class ChatController extends Controller
            
             ];
         
-          
+          $output=collect( $getReqs)->except('password');
                 
             ChatUser::create($getReqs);
-            $data = ['your details'=>$getReqs];
+            $data = ['your details'=> $output];
             return response()->json(["status"=>200,"data"=>$data,"message"=>"Registration Done Successfully"]);    
 
 
@@ -160,8 +160,13 @@ class ChatController extends Controller
                          ];
 
                         if($msgmodal->create($data)) 
-                        { return response()->json("ok");}
-                        else {return response()->json("not ok ");}
+                        { return response()->json(['message'=>'converstation strated between'." ". $data['sender_id'] 
+                            ."and".$data['receiver_id'] ,
+                             'your conversation id  is :'=>$data['con_id']
+                        
+                        
+                        ]);}
+                        else {return response()->json("some thing went wrong ");}
 
                       
                      
